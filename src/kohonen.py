@@ -260,7 +260,7 @@ if __name__ == '__main__':
   # DONNÉES D'APPRENTISSAGE
   # Nombre de données à générer pour les ensembles 1, 2 et 3
   # TODO décommenter les données souhaitées
-  nsamples = 999
+  nsamples = 1000
   # Ensemble de données 1
   samples = numpy.random.random((nsamples,2,1))
   samples[:,0,:] -= 1
