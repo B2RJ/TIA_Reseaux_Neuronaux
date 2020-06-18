@@ -284,7 +284,7 @@ class SOM:
 if __name__ == '__main__':
   # Création d'un réseau avec une entrée (2,1) et une carte (10,10)
   #TODO mettre à jour la taille des données d'entrée pour les données robotiques
-  network = SOM((2,1),(10,10))
+  network = SOM((2,1),(15,15)) # SOM((2,1),(10,10))
   # PARAMÈTRES DU RÉSEAU
   # Taux d'apprentissage
   ETA = 0.05 #0.05
@@ -302,8 +302,8 @@ if __name__ == '__main__':
   # TODO décommenter les données souhaitées
   nsamples = 1000
   # Ensemble de données 1
-  samples = numpy.random.random((nsamples,2,1))
-  samples[:,0,:] -= 1
+  # samples = numpy.random.random((nsamples,2,1))
+  # samples[:,0,:] -= 1
   # Ensemble de données 2
   # samples1 = -numpy.random.random((nsamples//3,2,1))
   # samples2 = numpy.random.random((nsamples//3,2,1))
@@ -312,11 +312,11 @@ if __name__ == '__main__':
   # samples3[:,1,:] -= 1
   # samples = numpy.concatenate((samples1,samples2,samples3))
   # Ensemble de données 3
-  # samples1 = numpy.random.random((nsamples//2,2,1))
-  # samples1[:,0,:] -= 1
-  # samples2 = numpy.random.random((nsamples//2,2,1))
-  # samples2[:,1,:] -= 1
-  # samples = numpy.concatenate((samples1,samples2))
+  samples1 = numpy.random.random((nsamples//2,2,1))
+  samples1[:,0,:] -= 1
+  samples2 = numpy.random.random((nsamples//2,2,1))
+  samples2[:,1,:] -= 1
+  samples = numpy.concatenate((samples1,samples2))
   # Ensemble de données robotiques
 #  samples = numpy.random.random((nsamples,4,1))
 #  samples[:,0:2,:] *= numpy.pi
