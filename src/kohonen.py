@@ -278,7 +278,7 @@ class SOM:
     beta = sqrt((miniX - miniX)**2 + (maxiY-miniY)**2)
 
     area = alpha * beta
-    print("moyenne: " , area)
+    print("aire: " , area)
 
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
@@ -296,7 +296,7 @@ if __name__ == '__main__':
   #TODO à mettre à faux pour que les simulations aillent plus vite
   VERBOSE = True
   # Nombre de pas de temps avant rafraissichement de l'affichage
-  NAFFICHAGE = 1000
+  NAFFICHAGE = N #1000
   # DONNÉES D'APPRENTISSAGE
   # Nombre de données à générer pour les ensembles 1, 2 et 3
   # TODO décommenter les données souhaitées
