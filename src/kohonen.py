@@ -67,7 +67,7 @@ class Neuron:
     @type x: numpy array
     '''
     # TODO (attention à ne pas changer la partie à gauche du =)
-    size = self.weights[:]
+    #size = self.weights[:]
     delta = eta * exp(-(sqrt((self.posx - posxbmu)**2 + (self.posy - posybmu)**2)**2) / (2*sigma**2) ) * (x - self.weights)
     self.weights[:] = self.weights[:] + delta
 
@@ -140,9 +140,6 @@ class SOM:
     for posx in range(self.gridsize[0]):
       for posy in range(self.gridsize[1]):
         self.map[posx][posy].learn(eta,sigma,bmux,bmuy,x)
-
-        
-      
 
   def scatter_plot(self,interactive=False):
     '''
@@ -251,6 +248,38 @@ class SOM:
     # On renvoie l'erreur de quantification vectorielle moyenne
     return s/nsamples
 
+  def area(self):
+    '''
+    @summary: Calcul de l'aire prise par la grille
+    '''
+    #Taille de la grille
+    size = len(self.weightsmap)
+    maxiX = -1000
+    miniX = 1000
+    maxiY = -1000
+    miniY = 1000
+
+    #On parcours la grille
+    for i in range (size):
+      for j in range(size):
+        a = self.weightsmap[i][j][0]
+        b = self.weightsmap[i][j][1]
+        if (a < miniX):
+          miniX = a
+        if (a > maxiX):
+          maxiX = a
+        if (b < miniY):
+          miniY = b
+        if (b > maxiY):
+          maxiY = b
+
+    #alpha et beta sont les côtés de la grille
+    alpha = sqrt((maxiX - miniX)**2 + (maxiY-maxiY)**2)
+    beta = sqrt((miniX - miniX)**2 + (maxiY-miniY)**2)
+
+    area = alpha * beta
+    print("moyenne: " , area)
+
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
   # Création d'un réseau avec une entrée (2,1) et une carte (10,10)
@@ -258,11 +287,11 @@ if __name__ == '__main__':
   network = SOM((2,1),(10,10))
   # PARAMÈTRES DU RÉSEAU
   # Taux d'apprentissage
-  ETA = 0.05
+  ETA = 0.05 #0.05
   # Largeur du voisinage
-  SIGMA = 1.4
+  SIGMA =  1.4 #1.4
   # Nombre de pas de temps d'apprentissage
-  N = 30000
+  N = 30000  #30000
   # Affichage interactif de l'évolution du réseau 
   #TODO à mettre à faux pour que les simulations aillent plus vite
   VERBOSE = True
@@ -345,6 +374,8 @@ if __name__ == '__main__':
   if VERBOSE:
     # Désactivation du mode interactif
     plt.ioff()
+  #Affichage de l'aire
+  network.area()
   # Affichage des poids du réseau
   network.plot()
   # Affichage de l'erreur de quantification vectorielle moyenne après apprentissage
