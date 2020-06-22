@@ -103,7 +103,9 @@ class SOM:
       wmline = []
       amline = []
       for posy in range(gridsize[1]):
-        neuron = Neuron(numpy.random.random(self.inputsize),posx,posy)
+        # neuron = Neuron(numpy.random.random(self.inputsize),posx,posy)
+        #Pour centrer la grille au départ
+        neuron = Neuron(numpy.random.random(self.inputsize)-0.5,posx,posy)
         mline.append(neuron)
         wmline.append(neuron.weights)
         amline.append(neuron.y)
@@ -284,14 +286,14 @@ class SOM:
 if __name__ == '__main__':
   # Création d'un réseau avec une entrée (2,1) et une carte (10,10)
   #TODO mettre à jour la taille des données d'entrée pour les données robotiques
-  network = SOM((2,1),(15,15)) # SOM((2,1),(10,10))
+  network = SOM((2,1),(10,10)) # SOM((2,1),(10,10))
   # PARAMÈTRES DU RÉSEAU
   # Taux d'apprentissage
   ETA = 0.05 #0.05
   # Largeur du voisinage
   SIGMA =  1.4 #1.4
   # Nombre de pas de temps d'apprentissage
-  N = 30000  #30000
+  N = 11500  #30000
   # Affichage interactif de l'évolution du réseau 
   #TODO à mettre à faux pour que les simulations aillent plus vite
   VERBOSE = True
@@ -302,8 +304,18 @@ if __name__ == '__main__':
   # TODO décommenter les données souhaitées
   nsamples = 1000
   # Ensemble de données 1
-  # samples = numpy.random.random((nsamples,2,1))
-  # samples[:,0,:] -= 1
+  samples = numpy.random.random((nsamples,2,1))
+  samples[:,0,:] -= 1
+  # Ensemble de données 1 centrées
+  #samples = numpy.random.random((nsamples,2,1))-0.50
+  # Ensemble de données centrées + condensées
+  # On créé deux samples qu'on ajoute avec un sample plus petit que l'autre
+  #samples1 = numpy.random.random((nsamples,2,1))-0.50
+  #samples2 = (numpy.random.random((nsamples,2,1))-0.25)/2
+  #samples = samples1 + samples2
+  #samples1[:,0,:] -= 0
+  #samples2[:,0,:] -= 0
+  #samples = samples1 + samples2
   # Ensemble de données 2
   # samples1 = -numpy.random.random((nsamples//3,2,1))
   # samples2 = numpy.random.random((nsamples//3,2,1))
@@ -312,11 +324,11 @@ if __name__ == '__main__':
   # samples3[:,1,:] -= 1
   # samples = numpy.concatenate((samples1,samples2,samples3))
   # Ensemble de données 3
-  samples1 = numpy.random.random((nsamples//2,2,1))
-  samples1[:,0,:] -= 1
-  samples2 = numpy.random.random((nsamples//2,2,1))
-  samples2[:,1,:] -= 1
-  samples = numpy.concatenate((samples1,samples2))
+  # samples1 = numpy.random.random((nsamples//2,2,1))
+  # samples1[:,0,:] -= 1
+  # samples2 = numpy.random.random((nsamples//2,2,1))
+  # samples2[:,1,:] -= 1
+  # samples = numpy.concatenate((samples1,samples2))
   # Ensemble de données robotiques
 #  samples = numpy.random.random((nsamples,4,1))
 #  samples[:,0:2,:] *= numpy.pi
